@@ -9,8 +9,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ $title ?? '' }}</title>
 
-  <meta name="keywords" content="Musma Teknik 2024" />
-  <meta name="description" content="Musma Teknik 2024">
+  <meta name="keywords" content="Musma Teknik 2025" />
+  <meta name="description" content="Musma Teknik 2025">
   <meta name="SMFT" content="smft.unud.id/musma">
 
   <!-- Favicon -->
