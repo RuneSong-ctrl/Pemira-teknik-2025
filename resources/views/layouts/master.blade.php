@@ -102,7 +102,7 @@
           <div class="container py-2">
             <div class="row py-4">
               <div class="col d-flex align-items-center justify-content-center">
-                <p><strong>MUSMA TEKNIK 2024</strong> - © Copyright 2024. All Rights Reserved.</p>
+                <p><strong>MUSMA TEKNIK 2025</strong> - © Copyright 2025. All Rights Reserved.</p>
               </div>
             </div>
           </div>
