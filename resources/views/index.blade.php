@@ -1,4 +1,4 @@
-@extends('layouts/master', ['title' => 'Musma Teknik 2025 - Pemilihan Ketua SMFT & BPMFT UNUD'])
+@extends('layouts/master', ['title' => 'Musma Teknik 2025 '])
 @section('content')
     @php
         $currentDate = now()->format('Y-m-d H:i:s');
