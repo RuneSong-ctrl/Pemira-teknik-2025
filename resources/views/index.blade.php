@@ -298,7 +298,10 @@
                                     <i class="fas fa-lock mr-2 text-musma-red"></i> Silahkan login terlebih dahulu untuk melakukan pemilihan.
                                 @endguest
                                 @auth
-                                    @if ($mahasiswa->status == 'voted')
+                                    {{-- FIX: Cek jika data mahasiswa ada --}}
+                                    @if (!$mahasiswa)
+                                        <i class="fas fa-exclamation-circle mr-2 text-warning"></i> Data mahasiswa tidak ditemukan. Silahkan hubungi panitia.
+                                    @elseif ($mahasiswa->status == 'voted')
                                         <i class="fas fa-check-circle text-success mr-2"></i> Terima kasih, Anda sudah menggunakan hak pilih Anda.
                                     @elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status != 'voted')
                                         <i class="fas fa-clock mr-2 text-warning"></i> Akun Anda sedang dalam proses verifikasi oleh panitia.
@@ -337,10 +340,14 @@
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <label class="candidate-card-label w-100">
                                         <input type="radio" @guest disabled @endguest
-                                            @auth @if ($currentDate < $startDate || $currentDate > $endDate || $mahasiswa->status == 'terdaftar' || $mahasiswa->status == 'voted') disabled @endif 
-                                            @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach 
+                                            @auth 
+                                                {{-- FIX: Gunakan optional() untuk mencegah error pada null --}}
+                                                @if ($currentDate < $startDate || $currentDate > $endDate || optional($mahasiswa)->status == 'terdaftar' || optional($mahasiswa)->status == 'voted') disabled @endif 
+                                                @if($suara)
+                                                    @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
+                                                @endif 
                                             @endauth required name="smft" value="{{ $item->id }}" />
-                                        
+                                    
                                         <div class="candidate-card-inner">
                                             <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -372,10 +379,14 @@
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <label class="candidate-card-label w-100">
                                         <input type="radio" @guest disabled @endguest
-                                            @auth @if ($currentDate < $startDate || $currentDate > $endDate || $mahasiswa->status == 'terdaftar' || $mahasiswa->status == 'voted') disabled @endif 
-                                            @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach 
+                                            @auth 
+                                                {{-- FIX: Gunakan optional() --}}
+                                                @if ($currentDate < $startDate || $currentDate > $endDate || optional($mahasiswa)->status == 'terdaftar' || optional($mahasiswa)->status == 'voted') disabled @endif 
+                                                @if($suara)
+                                                    @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach 
+                                                @endif
                                             @endauth required name="bpmft" value="{{ $item->id }}" />
-                                        
+                                    
                                         <div class="candidate-card-inner">
                                              <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -397,7 +408,8 @@
                     @auth
                         @if ($currentDate > $startDate && $currentDate < $endDate)
                             <div class="result mt-5 text-center appear-animation" data-aos="zoom-in" data-aos-delay="600">
-                                @if ($mahasiswa->status != 'voted' && $mahasiswa->status == 'terverifikasi')
+                                {{-- FIX: Cek $mahasiswa ada dulu sebelum cek status --}}
+                                @if ($mahasiswa && $mahasiswa->status != 'voted' && $mahasiswa->status == 'terverifikasi')
                                     <button class="btn btn-musma-primary btn-lg" style="font-size: 1.1rem;" type="button" id="btn-submit" data-toggle="modal"
                                         data-target="#exampleModalalert">
                                         <i class="fas fa-paper-plane mr-2"></i> KIRIM PILIHAN SAYA
@@ -496,13 +508,14 @@
         </div>
     </div>
 
-    @if (!Auth::user() or $mahasiswa->status != 'voted')
+    {{-- FIX: Perbaikan logika cek status untuk modal tutor --}}
+    @if (!Auth::user() or optional($mahasiswa)->status != 'voted')
         <div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content border-0 shadow-lg">
                     <div class="modal-header bg-musma-maroon text-white">
-                        <h5 class="modal-title font-weight-bold text-white" id="exampleModalLabel"><i class="fas fa-info-circle mr-2"></i> Alur Pemilihan Musma 2025</h5>
+                        <h5 class="modal-title font-weight-bold text-white"><i class="fas fa-info-circle mr-2"></i> Alur Pemilihan Musma 2025</h5>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>

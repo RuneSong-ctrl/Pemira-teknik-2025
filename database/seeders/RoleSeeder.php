@@ -7,26 +7,14 @@ use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        Role::create([
-            'name' => 'admin',
-            'guard_name' => 'web'
-        ]);
+        
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Role::create([
-            'name' => 'sekre',
-            'guard_name' => 'web'
-        ]);
-
-        Role::create([
-            'name' => 'mahasiswa',
-            'guard_name' => 'web'
-        ]);
+        
+        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'sekre', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'mahasiswa', 'guard_name' => 'web']);
     }
 }

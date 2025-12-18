@@ -27,12 +27,26 @@ class MainController extends Controller
         $id_user = Auth::id();
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
-        $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-        if (Auth::user()) {
+        
+        // Perbaikan: Pakai first() langsung, jangan get()->first()
+        $mahasiswa = Mahasiswa::where('user_id', $id_user)->first(); 
+
+        // Perbaikan Utama: Cek jika user login DAN data mahasiswa ditemukan
+        if (Auth::check() && $mahasiswa) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
-            return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
+            return view('index', [
+                'smft' => $smft, 
+                'bpmft' => $bpmft, 
+                'suara' => $suara, 
+                'mahasiswa' => $mahasiswa
+            ]);
         } else {
-            return view('index', ['smft' => $smft, 'bpmft' => $bpmft]);
+            // Jika belum login atau bukan mahasiswa, tetap kirim variabel $mahasiswa (null) agar view tidak error
+            return view('index', [
+                'smft' => $smft, 
+                'bpmft' => $bpmft,
+                'mahasiswa' => $mahasiswa 
+            ]);
         }
     }
 
@@ -41,13 +55,24 @@ class MainController extends Controller
         $id_user = Auth::id();
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
-        $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+        
+        $mahasiswa = Mahasiswa::where('user_id', $id_user)->first();
 
-        if (Auth::user()) {
+        // Perbaikan Utama: Cek jika user login DAN data mahasiswa ditemukan
+        if (Auth::check() && $mahasiswa) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
-            return view('rekap', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
+            return view('rekap', [
+                'smft' => $smft, 
+                'bpmft' => $bpmft, 
+                'suara' => $suara, 
+                'mahasiswa' => $mahasiswa
+            ]);
         } else {
-            return view('rekap', ['smft' => $smft, 'bpmft' => $bpmft,  'mahasiswa' => $mahasiswa]);
+            return view('rekap', [
+                'smft' => $smft, 
+                'bpmft' => $bpmft, 
+                'mahasiswa' => $mahasiswa
+            ]);
         }
     }
 
@@ -85,38 +110,20 @@ class MainController extends Controller
 
     public function vote(Request $request)
     {
-        // $data = json_decode(file_get_contents(public_path('data/info.json')), true);
-        // $voteDate = app()->environment('local') ? date('Y-m-d') : $data['masa_pemilihan']['date'];
-
-        // $voteDate = '2024-01-14';
-
-        // if (!Auth::check()) {
-        //     return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
-        // }
-
-        // if (date('Y-m-d') !== $voteDate) {
-        //     return "Vote hanya dapat dilakukan pada tanggal 14 Januari 2024 pukul 06.00 - 24.00";
-        // }
-
-        // $voteDate = '2024-01-14';
         $currentDate = now()->format('Y-m-d H:i:s');
 
         if (!Auth::check()) {
             return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
         }
 
-        // if (date('Y-m-d') !== $voteDate) {
-        //     // return "Vote Hanya dapat dilakukan pada tanggal 14 Januari 2024";
-        //     return "Vote hanya dapat dilakukan pada tanggal 14 Januari 2024 pukul 06.00 - 23.59";
-        // }
-
+        // Pastikan tanggal ini sesuai jadwal pemilihan kamu
         if ($currentDate < '2025-01-10 06:00:00' || $currentDate > '2025-01-10 23:59:59') {
             return "Vote hanya dapat dilakukan pada tanggal 10 Januari 2025 pukul 06.00 - 23.59";
         }
 
         $id_user = Auth::id();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->first();
-        $user = User::find($id_user);
+        // $user = User::find($id_user); // Tidak dipakai, bisa dihapus jika mau
 
         if (!$mahasiswa) {
             return "Vote Gagal, Maaf Anda Belum Terverifikasi";
@@ -153,6 +160,8 @@ class MainController extends Controller
 
     public function chart()
     {
+        $rekap = []; // Inisialisasi array rekap
+
         foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
             $prodis = [];
             $prodisValues = [];
@@ -163,7 +172,7 @@ class MainController extends Controller
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('suaras.calon_id', '=', $calon_smft->id)
                     ->where('users.prodi_id', '=', $prodi->id)
-                    ->get()->count();
+                    ->count(); // get()->count() diganti count() biar lebih cepat
 
                 array_push($prodis, $prodi->nama_prodi);
                 array_push($prodisValues, $jumlah);
@@ -181,7 +190,7 @@ class MainController extends Controller
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('suaras.calon_id', '=', $calon_bpmft->id)
                     ->where('users.prodi_id', '=', $prodi->id)
-                    ->get()->count();
+                    ->count();
 
                 array_push($prodis, $prodi->nama_prodi);
                 array_push($prodisValues, $jumlah);
@@ -195,6 +204,7 @@ class MainController extends Controller
 
     public function rekap()
     {
+        $rekap = []; // Inisialisasi array rekap
 
         foreach (Prodi::cursor() as $prodi) {
             $calonNames = [];
@@ -206,7 +216,7 @@ class MainController extends Controller
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('users.prodi_id', '=', $prodi->id)
                     ->where('suaras.calon_id', '=', $calon_bpmft->id)
-                    ->get()->count();
+                    ->count();
 
                 array_push($calonNames, $calon_bpmft->nama_panggilan);
                 array_push($calonVotes, $jumlah);
@@ -222,7 +232,7 @@ class MainController extends Controller
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('users.prodi_id', '=', $prodi->id)
                     ->where('suaras.calon_id', '=', $calon_smft->id)
-                    ->get()->count();
+                    ->count();
 
                 array_push($calonNames, $calon_smft->nama_panggilan);
                 array_push($calonVotes, $jumlah);
@@ -231,12 +241,6 @@ class MainController extends Controller
             $rekap['SMFT'][$prodi->nama_prodi]['calon_votes'] = $calonVotes;
         }
 
-        // $id_user = Auth::id();
-        // $smft = Calon::where('jenis_calon', 'SMFT')->get();
-        // $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
-        // $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-
-        //$suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
         return view('rekap', compact(['rekap']));
     }
 
