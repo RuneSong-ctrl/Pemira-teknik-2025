@@ -348,7 +348,7 @@
 
     .form-control {
         width: 100%;
-        padding: 10px 14px 10px 40px; 
+        padding: 10px 14px 10px 15px; 
         font-size: 0.9rem;
         color: #1f2937;
         background-color: #f9fafb;
@@ -357,6 +357,7 @@
         transition: all 0.3s ease;
         outline: none;
         height: 44px;
+        text-align: left;
     }
     
     .form-control.file-input { padding-top: 8px; height: 44px; cursor: pointer; }
