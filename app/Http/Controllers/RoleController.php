@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role_model;
-use App\Models\role;
+use App\Models\Role;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
