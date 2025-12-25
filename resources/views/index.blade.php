@@ -341,7 +341,6 @@
                                     <label class="candidate-card-label w-100">
                                         <input type="radio" @guest disabled @endguest
                                             @auth 
-                                                {{-- FIX: Gunakan optional() untuk mencegah error pada null --}}
                                                 @if ($currentDate < $startDate || $currentDate > $endDate || optional($mahasiswa)->status == 'terdaftar' || optional($mahasiswa)->status == 'voted') disabled @endif 
                                                 @if($suara)
                                                     @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
@@ -383,7 +382,7 @@
                                                 {{-- FIX: Gunakan optional() --}}
                                                 @if ($currentDate < $startDate || $currentDate > $endDate || optional($mahasiswa)->status == 'terdaftar' || optional($mahasiswa)->status == 'voted') disabled @endif 
                                                 @if($suara)
-                                                    @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach 
+                                                    @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
                                                 @endif
                                             @endauth required name="bpmft" value="{{ $item->id }}" />
                                     
