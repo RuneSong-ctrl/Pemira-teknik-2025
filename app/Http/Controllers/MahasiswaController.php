@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
-    public function index()
-    {
-        return view('admin/mahasiswa/index');
-    }
-
     public function data()
     {
         $mahasiswa = Mahasiswa::orderByRaw('FIELD(status, "terdaftar")DESC')->orderBy('id', 'DESC')->get();
@@ -57,7 +52,7 @@ class MahasiswaController extends Controller
             if ($item->status == 'terverifikasi' || $item->status == 'voted') {
                 $output .= '<td> <div class="text-center"><i class="fa fa-check"></i></div></td>';
             } else {
-                $output .= '<td> <a href=' . $item->takeimage . ' data-fancybox="gallery" data-caption=' . $item->name . ' ><img src=' . $item->takeimage . ' alt="avatar" style="max-width: 100px"></a></td>';
+                $output .= '<td> <a href="' . $item->takeimage . '" data-fancybox="gallery" data-caption="' . $item->name . '" ><img src="' . $item->takeimage . '" alt="avatar" style="max-width: 100px"></a></td>';
             }
 
             $output .= '<td>' . ($item->status == "voted" ? "Telah Memilih" : "Golput") . '</td>
@@ -67,8 +62,10 @@ class MahasiswaController extends Controller
                 $output .= '<td> <div class=" text-center"><i class="fa fa-check"></i></div></td>';
             } else {
                 $output .= '<td>
-                <div class=" text-center"><button class="btn-verif btn btn-primary" type="button" data-id=' . $item->id . '>Verif</button>
-                <button class="btn-delete btn btn-danger" type="button" data-id=' . $item->id . '>Hapus</button></div>
+                <div class="text-center">
+                    <button class="btn-open-verif btn btn-primary" type="button" data-id="' . $item->id . '">Verif</button>
+                    <button class="btn-open-delete btn btn-danger" type="button" data-id="' . $item->id . '">Hapus</button>
+                </div>
                 </td>';
             };
             echo $output;

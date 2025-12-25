@@ -91,9 +91,7 @@
     $('#verif').appendTo("body");
     $('#delete').appendTo("body");
     $('#alert').appendTo("body");
-    // ---------------------------------------------
 
-    // Setup CSRF Token Laravel
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,26 +100,21 @@
 
     loaddata();
 
-    // 1. Tombol Buka Modal Verifikasi
     $(document).on('click', '.btn-open-verif', function() {
         var id = $(this).attr('data-id');
-        console.log("Membuka Verif ID: " + id);
-        $('#btnConfirmVerif').data('id', id); // Simpan ID
+        $('#btnConfirmVerif').attr('data-id', id);
         $('#verif').modal('show');
     });
 
-    // 2. Tombol Buka Modal Hapus
     $(document).on('click', '.btn-open-delete', function() {
         var id = $(this).attr('data-id');
-        console.log("Membuka Delete ID: " + id);
-        $('#btnConfirmDelete').data('id', id); // Simpan ID
+        $('#btnConfirmDelete').attr('data-id', id);
         $('#delete').modal('show');
     });
 
-    // 3. Eksekusi Confirm Verifikasi
     $(document).on("click", '#btnConfirmVerif', function(e) {
         e.preventDefault();
-        var dataId = $(this).data('id');
+        var dataId = $(this).attr('data-id');
         var $btn = $(this);
 
         if(!dataId) return alert("Error: ID Kosong");
@@ -144,10 +137,9 @@
         });
     });
 
-    // 4. Eksekusi Confirm Hapus
     $(document).on("click", '#btnConfirmDelete', function(e) {
         e.preventDefault();
-        var dataId = $(this).data('id');
+        var dataId = $(this).attr('data-id');
         var $btn = $(this);
 
         if(!dataId) return alert("Error: ID Kosong");
@@ -159,7 +151,7 @@
             type: 'delete',
             success: function(response) {
                 $('#delete').modal('hide');
-                $('#alert').modal('show'); // Munculkan notif sukses
+                $('#alert').modal('show');
                 loaddata();
                 $btn.prop('disabled', false).text('Confirm');
             },
@@ -171,7 +163,6 @@
         });
     });
 
-    // Fungsi Load Data
     function loaddata() {
       $.ajax({
         url: '/admin/mahasiswa/data',
