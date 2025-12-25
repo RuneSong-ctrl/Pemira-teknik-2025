@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
+    public function index()
+    {
+        return view('admin/mahasiswa/index');
+    }
+
     public function data()
     {
         $mahasiswa = Mahasiswa::orderByRaw('FIELD(status, "terdaftar")DESC')->orderBy('id', 'DESC')->get();
@@ -83,11 +88,17 @@ class MahasiswaController extends Controller
     {
         $user = User::find($mahasiswa->user_id);
         $role = Role_model::find($mahasiswa->user_id);
-        // dd($role);
-        $user->password = null;
-        $user->save();
+        
+        if ($user) {
+            $user->password = null;
+            $user->save();
+        }
+        
         Storage::delete($mahasiswa->file_url);
         $mahasiswa->delete();
-        $role->delete();
+        
+        if ($role) {
+            $role->delete();
+        }
     }
 }
