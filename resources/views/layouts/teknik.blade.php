@@ -28,9 +28,7 @@
   <div id="app" class="position-relative w-100 d-flex align-items-center justify-content-center"
     style="min-height: 100vh;overflow:hidden; background: black; padding:100px 0 60px 0px;">
 
-    <div class="position-absolute bg-custom-red hidden">
-      <img src="/img/logo-red.png" alt="Logo Teknik">
-    </div>
+ 
 
     <main class="text-white glassmorph main-container" style="margin: 20px">
       @yield('content')

@@ -10,7 +10,7 @@
                     <i class="fas fa-university"></i>
                 </div>
                 <h2>Musma<br>2025</h2>
-                <p>E-Voting Pemira Teknik</p>
+                <p>E-Voting Pemira Teknik 2026</p>
             </div>
             <div class="visual-pattern"></div>
         </div>
@@ -54,6 +54,7 @@
                                        id="password"
                                        placeholder="Password" 
                                        required>
+                                <i class="fas fa-eye toggle-password" id="togglePassword"></i>
                             </div>
                             @error('password')
                                 <span class="error-msg">{{ $message }}</span>
@@ -102,10 +103,20 @@
     $("#nim").inputFilter(function(value) {
         return /^-?\d*$/.test(value);
     });
+
+    $("#togglePassword").click(function() {
+        var input = $("#password");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+            $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+        } else {
+            input.attr("type", "password");
+            $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+    });
 </script>
 
 <style>
-    /* Wrapper Utama */
     .login-wrapper {
         min-height: 100vh;
         width: 100%;
@@ -116,12 +127,11 @@
         background: transparent;
     }
 
-    /* Container Card - Compact Size (800px) */
     .login-container {
         display: flex;
         width: 800px; 
         max-width: 100%;
-        min-height: 450px; /* Tinggi disesuaikan lagi agar pas */
+        min-height: 450px;
         background: #ffffff;
         border-radius: 20px;
         box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
@@ -129,7 +139,6 @@
         position: relative;
     }
 
-    /* Bagian Visual (Kiri) */
     .login-visual {
         flex: 0.8;
         background: linear-gradient(135deg, #810000 0%, #4a0000 100%);
@@ -173,10 +182,9 @@
         background-size: 20px 20px; z-index: 1; opacity: 0.6;
     }
 
-    /* Bagian Form (Kanan) */
     .login-form-section {
         flex: 1.2;
-        padding: 40px 50px; /* Padding samping ditambah sedikit */
+        padding: 40px 50px;
         background: #ffffff;
         display: flex;
         flex-direction: column;
@@ -189,15 +197,13 @@
     .form-header h3 { font-size: 1.5rem; font-weight: 800; color: #111827; margin-bottom: 5px; }
     .form-header p { color: #6b7280; font-size: 0.9rem; }
 
-    /* --- GRID SYSTEM UNTUK PROPORSIONAL --- */
     .form-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 Kolom Seimbang */
-        gap: 15px; /* Jarak antar kolom */
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
         margin-bottom: 5px;
     }
 
-    /* Input Styling */
     .input-group { margin-bottom: 15px; }
     .input-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.85rem; color: #374151; }
     .input-wrapper { position: relative; }
@@ -207,9 +213,24 @@
         color: #9ca3af; font-size: 1rem; z-index: 10;
     }
 
+    .toggle-password {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        cursor: pointer;
+        z-index: 10;
+        transition: color 0.3s;
+    }
+
+    .toggle-password:hover {
+        color: #810000;
+    }
+
     .form-control {
         width: 100%;
-        padding: 10px 14px 10px 40px;
+        padding: 10px 45px 10px 40px;
         font-size: 0.9rem;
         color: #1f2937;
         background-color: #f9fafb;
@@ -227,7 +248,6 @@
     .form-control.is-invalid { border-color: #ef4444; background-color: #fff5f5; }
     .error-msg { display: block; margin-top: 4px; font-size: 0.75rem; color: #ef4444; font-weight: 500; }
 
-    /* Tombol */
     .submit-btn {
         width: 100%; padding: 12px;
         background-color: #810000; color: white;
@@ -244,11 +264,10 @@
     .form-footer a { color: #810000; font-weight: 700; text-decoration: none; }
     .form-footer a:hover { color: #660000; text-decoration: underline; }
 
-    /* Responsif untuk Tablet & HP */
     @media screen and (max-width: 850px) {
         .login-container { flex-direction: column; width: 450px; min-height: auto; }
         .login-visual { padding: 30px 20px; min-height: 160px; flex: unset; }
-        .form-grid { grid-template-columns: 1fr; gap: 0; } /* Kembali ke 1 kolom di layar kecil */
+        .form-grid { grid-template-columns: 1fr; gap: 0; }
         .login-form-section { padding: 30px; flex: unset; }
     }
 

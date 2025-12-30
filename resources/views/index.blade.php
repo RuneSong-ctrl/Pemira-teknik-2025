@@ -8,26 +8,27 @@
 
     <style>
         :root {
-            --musma-maroon: #660000;
+            --musma-maroon: #800000;
             --musma-dark-maroon: #2b0000;
-            --musma-red: #990000;
-            --musma-gold: #D4AF37;
-            --musma-gold-light: #F1D570;
-            --musma-black: #111111;
-            --musma-white: #FFFFFF;
-            --musma-gray: #f9f9f9;
+            --musma-red: #cc0000;
+            --musma-black: #1a1a1a;
+            --musma-white: #ffffff;
+            --musma-gray: #f8f9fa;
+            --musma-border: #e0e0e0;
         }
 
         body {
             background-color: var(--musma-white) !important;
             color: var(--musma-black);
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
         }
 
+        .text-warning { color: var(--musma-red) !important; }
         .text-musma-maroon { color: var(--musma-maroon) !important; }
         .bg-musma-maroon { background-color: var(--musma-maroon) !important; color: white; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION CENTERED --- */
         .hero-fullscreen {
             position: relative;
             min-height: 100vh;
@@ -35,211 +36,328 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-image: 
-                linear-gradient(to bottom, rgba(43, 0, 0, 0.8), rgba(20, 0, 0, 0.6)), 
-                url('img/Untitled-3.png');
+            background-image: linear-gradient(to bottom, rgba(60, 0, 0, 0.9), rgba(20, 0, 0, 0.8)), url('img/Untitled-3.png');
             background-size: cover;
-            background-position: center 30%;
+            background-position: center;
             background-attachment: fixed;
             text-align: center;
             color: white;
-            padding: 140px 20px 40px 20px;
+            padding: 120px 20px 80px 20px;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 1140px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
-            width: 100%;
+            max-width: 950px;
+            margin: 0 auto;
         }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 1px solid var(--musma-gold);
-            color: var(--musma-gold-light);
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.9rem;
+        .hero-small-tag {
+            font-size: 1.2rem;
             font-weight: 700;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            letter-spacing: 3px;
+            color: var(--musma-white); 
+            text-transform: uppercase;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: inline-block;
+            border-bottom: 3px solid var(--musma-red);
+            padding-bottom: 10px;
         }
 
-        .hero-title {
-            font-size: 6.5rem;
-            font-weight: 900;
-            line-height: 0.85;
-            margin-bottom: 10px;
+        /* Teks Utama (Muswarah Mahsasiswa) */
+        .hero-title-main {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 5px;
             color: #ffffff;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            text-transform: uppercase;
         }
 
-        .hero-subtitle {
-            font-size: 6.5rem;
-            font-weight: 900;
-            line-height: 0.85;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--musma-gold);
-            margin-bottom: 15px;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .hero-year {
+        /* Teks Sub (Fakultas Teknik 2025) - Outline style */
+        .hero-title-sub {
             font-size: 3.5rem;
             font-weight: 800;
-            color: var(--musma-gold);
-            letter-spacing: 12px;
-            margin-bottom: 40px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            line-height: 1.1;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.95);
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
-        .hero-desc {
-            font-size: 1.6rem; 
-            color: #ffffff;
+        /* Teks Ketiga (Universitas Udayana) - DIPERBAGUS */
+        .hero-title-third {
+            font-size: 1.8rem;
             font-weight: 600;
-            line-height: 1.5;
+            color: #ffffff;
+            letter-spacing: 8px; /* Jarak huruf lebar biar elegan */
+            text-transform: uppercase;
             margin-bottom: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.9); 
+            display: inline-block;
+            position: relative;
+            opacity: 0.9;
         }
 
-        .btn-hero-cta {
-            background: linear-gradient(45deg, var(--musma-gold), var(--musma-gold-light));
-            color: var(--musma-dark-maroon);
-            padding: 20px 55px;
-            font-weight: 800;
-            border-radius: 50px;
+        .btn-hero-primary {
+            background-color: var(--musma-red);
+            color: white;
+            padding: 16px 45px;
+            font-weight: 700;
+            border-radius: 50px; 
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: none;
+            border: 2px solid var(--musma-red);
             transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(204, 0, 0, 0.3);
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 0 10px;
         }
 
-        .btn-hero-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.5);
-            color: var(--musma-maroon);
-            text-decoration: none;
-        }
-
-        .btn-hero-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255,255,255,0.5);
+        .btn-hero-primary:hover {
+            background-color: var(--musma-maroon);
+            border-color: var(--musma-maroon);
             color: white;
-            padding: 20px 45px;
-            font-weight: 700;
-            border-radius: 50px;
-            margin-left: 20px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             text-decoration: none;
-            display: inline-block;
         }
 
-        .btn-hero-secondary:hover {
+        .btn-hero-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 16px 45px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+        }
+
+        .btn-hero-outline:hover {
             background: white;
+            border-color: white;
             color: var(--musma-maroon);
             text-decoration: none;
+            transform: translateY(-5px);
         }
 
-        .section-about { padding: 100px 0; background-color: var(--musma-white); position: relative; }
-        .about-heading { font-size: 2.5rem; font-weight: 800; color: var(--musma-maroon); margin-bottom: 20px; position: relative; display: inline-block; }
-        .about-heading::after { content: ''; display: block; width: 50%; height: 4px; background: var(--musma-gold); margin: 15px auto 0; border-radius: 2px; }
-        .about-text { font-size: 1.1rem; color: #555; line-height: 1.8; max-width: 800px; margin: 0 auto 60px; }
-        .about-card { background: white; border: 1px solid #eee; padding: 40px 30px; border-radius: 20px; transition: all 0.4s ease; height: 100%; position: relative; overflow: hidden; z-index: 1; }
-        .about-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0; background: var(--musma-maroon); transition: all 0.4s ease; z-index: -1; }
-        .about-card:hover::before { height: 100%; }
-        .about-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--musma-maroon); }
-        .about-card:hover h4, .about-card:hover p, .about-card:hover .icon-box i { color: white !important; }
-        .about-card .icon-box { width: 80px; height: 80px; background: var(--musma-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 2rem; color: var(--musma-red); transition: all 0.4s; }
-        .about-card:hover .icon-box { background: rgba(255,255,255,0.2); }
-
-        .poll-status-alert { background: white; border-left: 5px solid var(--musma-gold); padding: 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .candidate-card-label { display: block; cursor: pointer; position: relative; height: 100%; }
-        .candidate-card-label input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; }
-        .candidate-card-inner { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 2px solid transparent; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
-        .candidate-card-label input[type="radio"]:checked + .candidate-card-inner { border-color: var(--musma-red); box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2); transform: translateY(-5px); }
-        .candidate-img-wrapper { height: 320px; overflow: hidden; position: relative; background-color: #f0f0f0; }
-        .candidate-img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s ease; }
-        .candidate-card-label:hover .candidate-img-wrapper img { transform: scale(1.03); }
-        .candidate-info { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: white; }
-        .candidate-name { font-size: 1.3rem; font-weight: 800; color: var(--musma-black); margin-bottom: 15px; }
-        .selected-indicator { position: absolute; top: 15px; right: 15px; background: var(--musma-gold); color: var(--musma-maroon); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0; transform: scale(0); transition: all 0.3s; z-index: 5; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .candidate-card-label input[type="radio"]:checked + .candidate-card-inner .selected-indicator { opacity: 1; transform: scale(1); }
+        /* --- SECTION LAINNYA --- */
+        .section-about { padding: 90px 0; background-color: var(--musma-white); }
+        .about-heading { font-size: 2.2rem; font-weight: 800; color: var(--musma-black); margin-bottom: 20px; position: relative; display: inline-block; }
+        .about-heading::after { content: ''; display: block; width: 60%; height: 4px; background: var(--musma-maroon); margin: 15px auto 0; border-radius: 2px; }
+        .about-text { font-size: 1.05rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto 60px; }
         
-        .footer-modern { background-color: var(--musma-dark-maroon); padding: 80px 0 40px; color: white; }
-        .footer-map-container { border-radius: 20px; overflow: hidden; height: 100%; min-height: 350px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1); }
-        .footer-info-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 40px; height: 100%; backdrop-filter: blur(10px); }
-        .footer-title { color: var(--musma-gold); font-weight: 800; font-size: 2rem; margin-bottom: 30px; letter-spacing: -1px; }
+        .about-card {
+            background: white;
+            border: 1px solid var(--musma-border);
+            padding: 40px 30px;
+            border-radius: 15px;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        
+        .about-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(128, 0, 0, 0.1); border-color: var(--musma-maroon); }
+        .about-card .icon-box { width: 70px; height: 70px; background: rgba(128, 0, 0, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 1.8rem; color: var(--musma-maroon); transition: all 0.3s; }
+        .about-card:hover .icon-box { background: var(--musma-maroon); color: white; }
+
+        .poll-status-alert { background: white; border-left: 4px solid var(--musma-maroon); padding: 25px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 40px; }
+        
+        .candidate-card-label { display: block; cursor: pointer; position: relative; height: 100%; width: 100%; }
+        .candidate-card-label input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; }
+        
+        .candidate-card-inner {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .candidate-card-label input[type="radio"]:checked + .candidate-card-inner {
+            border-color: var(--musma-maroon);
+            box-shadow: 0 15px 40px rgba(128, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .candidate-img-wrapper { height: 350px; overflow: hidden; position: relative; background-color: #f0f0f0; }
+        .candidate-img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s ease; filter: grayscale(20%); }
+        .candidate-card-label:hover .candidate-img-wrapper img { transform: scale(1.03); filter: grayscale(0%); }
+        .candidate-card-label input[type="radio"]:checked + .candidate-card-inner .candidate-img-wrapper img { filter: grayscale(0%); }
+
+        .candidate-info { padding: 25px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: white; }
+        .candidate-name { font-size: 1.4rem; font-weight: 700; color: var(--musma-black); margin-bottom: 15px; }
+
+        .selected-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--musma-red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .candidate-card-label input[type="radio"]:checked + .candidate-card-inner .selected-indicator { opacity: 1; transform: scale(1); }
+
+        .footer-modern { background-color: var(--musma-dark-maroon); padding: 80px 0 40px; color: white; border-top: 5px solid var(--musma-maroon); }
+        .footer-map-container { border-radius: 15px; overflow: hidden; height: 100%; min-height: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); }
+        .footer-info-card { background: rgba(0, 0, 0, 0.2); border-radius: 15px; padding: 40px; height: 100%; border: 1px solid rgba(255,255,255,0.05); }
+        .footer-title { color: white; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -0.5px; }
         .contact-list-item { display: flex; align-items: flex-start; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .contact-list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .contact-icon { font-size: 1.5rem; color: var(--musma-gold); margin-right: 20px; width: 30px; text-align: center; }
-        .contact-details h5 { color: white; font-weight: 700; margin-bottom: 5px; font-size: 1.1rem; }
-        .contact-details a, .contact-details p { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; display: block; transition: color 0.3s; }
-        .contact-details a:hover { color: var(--musma-gold-light); }
+        .contact-icon { font-size: 1.4rem; color: var(--musma-red); margin-right: 20px; width: 30px; text-align: center; }
+        .contact-details h5 { color: white; font-weight: 600; margin-bottom: 5px; font-size: 1.05rem; }
+        .contact-details a, .contact-details p { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; display: block; transition: color 0.2s; }
+        .contact-details a:hover { color: white; text-decoration: underline; }
 
-        .btn-musma-primary { background-color: var(--musma-maroon); color: white; font-weight: 700; padding: 12px 40px; border-radius: 50px; border: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 0, 0, 0.3); }
-        .btn-musma-primary:hover { background-color: var(--musma-red); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 0, 0, 0.4); color: white; }
-        .btn-musma-outline { background: transparent; border: 2px solid var(--musma-maroon); color: var(--musma-maroon); font-weight: 600; padding: 8px 20px; border-radius: 50px; transition: all 0.3s; }
-        .btn-musma-outline:hover { background: var(--musma-maroon); color: white; }
+        .btn-musma-primary {
+            background-color: var(--musma-maroon);
+            color: white;
+            font-weight: 600;
+            padding: 12px 35px;
+            border-radius: 50px;
+            border: 2px solid var(--musma-maroon);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3);
+        }
+        
+        .btn-musma-primary:hover {
+            background-color: var(--musma-red);
+            border-color: var(--musma-red);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(204, 0, 0, 0.4);
+            color: white;
+        }
 
-        /* --- TIMELINE MODAL --- */
-        .musma-timeline { position: relative; padding-left: 40px; margin: 20px 0; }
-        .musma-timeline::before { content: ''; position: absolute; top: 0; left: 15px; height: 100%; width: 3px; background: #eee; border-radius: 2px; }
-        .timeline-item { position: relative; margin-bottom: 40px; }
+        .btn-musma-outline {
+            background: transparent;
+            border: 2px solid var(--musma-maroon);
+            color: var(--musma-maroon);
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .btn-musma-outline:hover {
+            background: var(--musma-maroon);
+            color: white;
+            border-color: var(--musma-maroon);
+        }
+
+        .musma-timeline { position: relative; padding-left: 30px; margin: 20px 0; }
+        .musma-timeline::before { content: ''; position: absolute; top: 0; left: 14px; height: 100%; width: 2px; background: #e9ecef; }
+        .timeline-item { position: relative; margin-bottom: 35px; }
         .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-marker { position: absolute; top: 0; left: -40px; width: 34px; height: 34px; background: var(--musma-maroon); border: 3px solid var(--musma-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .timeline-content { background: white; border: 1px solid #eee; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
-        .timeline-content:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--musma-gold); }
-        .timeline-title { color: var(--musma-maroon); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; }
+        .timeline-marker {
+            position: absolute;
+            top: 0;
+            left: -30px;
+            width: 32px;
+            height: 32px;
+            background: var(--musma-maroon);
+            border: 4px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-content {
+            background: white;
+            border: 1px solid var(--musma-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .timeline-content:hover { border-color: var(--musma-maroon); }
+        .timeline-title { color: var(--musma-maroon); font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
         .timeline-text { font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0; }
-        .timeline-link { color: var(--musma-red); font-weight: 700; text-decoration: none; }
-        .timeline-link:hover { text-decoration: underline; color: var(--musma-maroon); }
+        .timeline-link { color: var(--musma-red); font-weight: 600; text-decoration: none; border-bottom: 1px dashed var(--musma-red); }
+        .timeline-link:hover { color: var(--musma-maroon); border-bottom-style: solid; text-decoration: none; }
 
         @media (max-width: 991px) {
-            .hero-fullscreen { padding-top: 120px; background-attachment: scroll; }
-            .hero-title, .hero-subtitle { font-size: 3.5rem; }
-            .hero-year { font-size: 2.5rem; }
-            .btn-hero-secondary { margin-left: 0; margin-top: 15px; display: block; width: 100%; }
-            .btn-hero-cta { display: block; width: 100%; }
-            .footer-map-container { min-height: 300px; margin-bottom: 30px; }
+            .hero-fullscreen { padding-top: 120px; padding-bottom: 80px; text-align: center; }
+            /* Penyesuaian ukuran font untuk tablet/mobile */
+            .hero-title-main { font-size: 3.2rem; }
+            .hero-title-sub { font-size: 2.5rem; }
+            .hero-title-third { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 40px; }
+            
+            .btn-hero-primary, .btn-hero-outline { display: flex; width: 100%; justify-content: center; margin: 15px 0 0 0; }
+            .footer-modern { padding: 60px 0 30px; }
+        }
+
+        @media (max-width: 576px) {
+            /* Penyesuaian ukuran font untuk layar kecil */
+            .hero-title-main { font-size: 2.4rem; }
+            .hero-title-sub { font-size: 1.8rem; }
+            .hero-title-third { font-size: 1.1rem; letter-spacing: 2px; }
+            .candidate-img-wrapper { height: 280px; }
         }
     </style>
 
     <div role="main" class="main" id="home">
         
         <section class="hero-fullscreen">
-            <div class="hero-content">
-                <div class="appear-animation" data-aos="fade-down" data-aos-delay="100">
-                    <span class="hero-badge">Pemilihan Raya 2025</span>
-                </div>
-                
-                <div class="appear-animation" data-aos="fade-up" data-aos-delay="200">
-                    <div class="hero-title">MUSMA</div>
-                    <div class="hero-subtitle">TEKNIK</div>
-                    <div class="hero-year">UNUD</div>
-                </div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="appear-animation" data-aos="fade-down" data-aos-delay="100">
+                        <span class="hero-small-tag">Pemira teknik 2026</span>
+                    </div>
+                    
+                    <div class="appear-animation" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="hero-title-main">Musyawarah Mahasiswa</div>
+                        <div class="hero-title-sub">Fakultas Teknik 2025</div>
+                        <div class="hero-title-third">Universitas Udayana</div>
+                    </div>
 
-                <p class="hero-desc appear-animation" data-aos="fade-up" data-aos-delay="400">
-                    Selamat datang pada Musma Teknik 2025
-                </p>
-
-                <div class="appear-animation" data-aos="fade-up" data-aos-delay="600">
-                    <a href="#Polling" class="btn-hero-cta">
-                        Vote Sekarang
-                    </a>
-                    <a href="#tentang" class="btn-hero-secondary">
-                        Info Detail
-                    </a>
+                    <div class="appear-animation" data-aos="fade-up" data-aos-delay="600">
+                        <button type="button" class="btn-hero-primary" data-toggle="modal" data-target="#modaltutor">
+                            <i class="fas fa-list-ol mr-2"></i> Alur Registrasi
+                        </button>
+                        <a href="#tentang" class="btn-hero-outline">
+                            Tentang Musma
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -258,8 +376,19 @@
                     <div class="col-md-6 col-lg-5 mb-4 mb-md-0 appear-animation" data-aos="fade-up" data-aos-delay="300">
                         <div class="about-card text-center">
                             <div class="icon-box">
-                                <i class="icons icon-layers"></i>
-                            </div>
+                             <div style="
+         width: 60px;                 
+        height: 60px;                
+        background-color: #FFC107;   
+        -webkit-mask: url('/img/ftunud.png') no-repeat center;
+        mask: url('/img/ftunud.png') no-repeat center;
+
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        
+        display: inline-block;
+    "></div>
+</div>
                             <h4 class="font-weight-bold text-musma-maroon mb-3">Ketua SMFT</h4>
                             <p class="text-muted mb-0">
                                 Pemilihan langsung Ketua Senat Mahasiswa Fakultas Teknik (SMFT) sebagai lembaga eksekutif yang akan memimpin pergerakan dan kegiatan mahasiswa selama satu periode kedepan.
@@ -269,8 +398,23 @@
                     <div class="col-md-6 col-lg-5 appear-animation" data-aos="fade-up" data-aos-delay="500">
                         <div class="about-card text-center">
                             <div class="icon-box">
-                                <i class="icons icon-menu"></i>
-                            </div>
+    <div style="
+        width: 60px;                
+        height: 60px;                
+        background-color: #8B0000;   
+        
+       
+        -webkit-mask: url('/img/ftunud.png') no-repeat center;
+        mask: url('/img/ftunud.png') no-repeat center;
+        
+       
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        
+        display: inline-block;
+    "></div>
+</div>
+                           
                             <h4 class="font-weight-bold text-musma-maroon mb-3">Ketua BPMFT</h4>
                             <p class="text-muted mb-0">
                                 Pemilihan langsung Ketua Badan Perwakilan Mahasiswa Fakultas Teknik (BPMFT) sebagai lembaga legislatif yang memegang fungsi pengawasan, aspirasi, dan legislasi.
@@ -287,7 +431,7 @@
                     <div class="col-lg-8 appear-animation" data-aos="fade-up">
                         <div class="position-relative d-inline-block mb-4">
                             <h2 class="font-weight-extra-bold text-7 m-0 text-musma-maroon">E-Voting Center</h2>
-                            <div style="width: 60px; height: 4px; background: var(--musma-gold); margin: 10px auto 0;"></div>
+                            <div style="width: 80px; height: 4px; background: var(--musma-red); margin: 15px auto 0; border-radius: 2px;"></div>
                         </div>
                         <p class="text-muted lead mb-4">Gunakan hak pilih Anda dengan bijak. Satu suara menentukan arah masa depan Teknik.</p>
                     </div>
@@ -298,7 +442,7 @@
                                     <i class="fas fa-lock mr-2 text-musma-red"></i> Silahkan login terlebih dahulu untuk melakukan pemilihan.
                                 @endguest
                                 @auth
-                                    {{-- FIX: Cek jika data mahasiswa ada --}}
+                                    
                                     @if (!$mahasiswa)
                                         <i class="fas fa-exclamation-circle mr-2 text-warning"></i> Data mahasiswa tidak ditemukan. Silahkan hubungi panitia.
                                     @elseif ($mahasiswa->status == 'voted')
@@ -310,14 +454,14 @@
                                     @else
                                         <i class="fas fa-vote-yea text-musma-red mr-2"></i> Akun Terverifikasi! 
                                         @if ($currentDate < $startDate || $currentDate > $endDate)
-                                            Silahkan Login kembali pada tanggal 10 Januari 2025 pukul 06.00 - 18.00 WITA.
+                                            Silahkan Login kembali pada tanggal 7 Januari 2026 pukul 06.00 - 18.00 WITA.
                                         @else
                                             Silahkan pilih kandidat SMFT dan BPMFT di bawah ini, lalu tekan tombol <strong>Kirim Pilihan</strong>.
                                         @endif
                                     @endif 
                                 @endauth
                             </div>
-                             <div class="warning bg-transparent"></div>
+                            <div class="warning bg-transparent"></div>
                         </div>
                     </div>
                 </div>
@@ -346,7 +490,7 @@
                                                     @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
                                                 @endif 
                                             @endauth required name="smft" value="{{ $item->id }}" />
-                                    
+                                       
                                         <div class="candidate-card-inner">
                                             <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -379,13 +523,13 @@
                                     <label class="candidate-card-label w-100">
                                         <input type="radio" @guest disabled @endguest
                                             @auth 
-                                                {{-- FIX: Gunakan optional() --}}
+                                                
                                                 @if ($currentDate < $startDate || $currentDate > $endDate || optional($mahasiswa)->status == 'terdaftar' || optional($mahasiswa)->status == 'voted') disabled @endif 
                                                 @if($suara)
                                                     @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
                                                 @endif
                                             @endauth required name="bpmft" value="{{ $item->id }}" />
-                                    
+                                       
                                         <div class="candidate-card-inner">
                                              <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -407,7 +551,7 @@
                     @auth
                         @if ($currentDate > $startDate && $currentDate < $endDate)
                             <div class="result mt-5 text-center appear-animation" data-aos="zoom-in" data-aos-delay="600">
-                                {{-- FIX: Cek $mahasiswa ada dulu sebelum cek status --}}
+                                
                                 @if ($mahasiswa && $mahasiswa->status != 'voted' && $mahasiswa->status == 'terverifikasi')
                                     <button class="btn btn-musma-primary btn-lg" style="font-size: 1.1rem;" type="button" id="btn-submit" data-toggle="modal"
                                         data-target="#exampleModalalert">
@@ -443,7 +587,7 @@
                                 </div>
                                 <div class="contact-details">
                                     <h5>Tanggal Pemilihan</h5>
-                                    <p>10 Januari 2025</p>
+                                    <p>7 Januari 2026</p>
                                 </div>
                             </div>
 
@@ -453,11 +597,11 @@
                                 </div>
                                  <div class="contact-details">
                                     <h5>Narahubung</h5>
-                                    <a href="https://api.whatsapp.com/send?phone=6287701115126" target="_blank">
-                                        +6287701115126 (Whatsapp)
+                                    <a href="https://api.whatsapp.com/send?phone=6281339832574" target="_blank">
+                                        +6281339832574 (Whatsapp)
                                     </a>
-                                    <a href="https://line.me/ti/p/~Komang.uda" target="_blank">
-                                        Komang.uda (Line)
+                                    <a href="https://line.me/ti/p/komangananta_wibawa " target="_blank">
+                                        komangananta_wibawa (Line)
                                     </a>
                                 </div>
                             </div>
@@ -507,7 +651,7 @@
         </div>
     </div>
 
-    {{-- FIX: Perbaikan logika cek status untuk modal tutor --}}
+    
     @if (!Auth::user() or optional($mahasiswa)->status != 'voted')
         <div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -530,7 +674,7 @@
                                         <a href="@if (Route::has('register')) {{ route('register') }} @else # @endif" class="timeline-link">Daftar</a>
                                         jika belum memiliki akun, atau klik
                                         <a href="@if (Route::has('auth')) {{ route('auth') }} @else # @endif" class="timeline-link">Login</a>
-                                        jika sudah memiliki akun. <br>Registrasi: <strong>3 - 9 Januari 2025.</strong>
+                                        jika sudah memiliki akun. <br>Registrasi: <strong>1 - 6 Januari 2026.</strong>
                                     </p>
                                 </div>
                             </div>
@@ -560,7 +704,7 @@
                                 <div class="timeline-content">
                                     <h4 class="timeline-title">Pemilihan</h4>
                                     <p class="timeline-text">
-                                        Jika akun sudah terverifikasi, Anda dapat melakukan pemilihan secara serempak pada tanggal <b>10 Januari 2025</b>.
+                                        Jika akun sudah terverifikasi, Anda dapat melakukan pemilihan secara serempak pada tanggal <b>7 Januari 2026</b>.
                                     </p>
                                 </div>
                             </div>

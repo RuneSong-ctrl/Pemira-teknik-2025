@@ -16,7 +16,7 @@
                     <i class="fas fa-user-plus"></i>
                 </div>
                 <h2>Registrasi<br>Pemilih</h2>
-                <p>Sistem E-Voting Pemira<br>Fakultas Teknik 2025</p>
+                <p>Sistem E-Voting Pemira<br>Fakultas Teknik 2026</p>
             </div>
             <div class="visual-pattern"></div>
         </div>
