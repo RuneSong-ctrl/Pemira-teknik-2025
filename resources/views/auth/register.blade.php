@@ -3,8 +3,8 @@
 @section('content')
     @php
         $currentDate = now()->format('Y-m-d H:i:s');
-        $startDate = date('Y-m-d', strtotime('2025-12-18'));
-        $voteDate = date('Y-m-d', strtotime('2025-12-31'));
+        $startDate = date('Y-m-d', strtotime('2026-01-01'));
+        $voteDate = date('Y-m-d', strtotime('2026-01-06'));
     @endphp
 
 <div class="login-wrapper">
@@ -28,7 +28,7 @@
                     <div class="state-message">
                         <div class="state-icon">⏳</div>
                         <h3>Pendaftaran Belum Dibuka</h3>
-                        <p>Silakan kembali pada tanggal<br><strong>18 - 20 Desember 2025</strong></p>
+                        <p>Silakan kembali pada tanggal<br><strong>01 - 06 Januari 2026 pukul 06.00 - 18.00</strong></p>
                         <a href="/" class="btn-outline">Kembali ke Beranda</a>
                     </div>
 
@@ -395,7 +395,8 @@
     /* STATE MESSAGE (Belum Buka/Tutup) */
     .state-message { text-align: center; padding: 10px; }
     .state-icon { font-size: 3rem; margin-bottom: 15px; }
-    .state-message h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .state-message h3 { font-size: 1.3rem; margin-bottom: 8px; color:black; }
+    .state-message p  { color: black; }
 
     /* STYLE KHUSUS PREVIEW GAMBAR */
     #preview-container { margin-top: 12px; animation: fadeIn 0.4s; }

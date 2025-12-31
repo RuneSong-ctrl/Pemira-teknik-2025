@@ -117,8 +117,8 @@ class MainController extends Controller
         }
 
         // Pastikan tanggal ini sesuai jadwal pemilihan kamu
-        if ($currentDate < '2025-01-10 06:00:00' || $currentDate > '2025-01-10 23:59:59') {
-            return "Vote hanya dapat dilakukan pada tanggal 10 Januari 2025 pukul 06.00 - 23.59";
+        if ($currentDate < '2026-01-07 06:00:00' || $currentDate > '2026-01-07 18:00:00') {
+            return "Vote hanya dapat dilakukan pada tanggal 7 Januari 2026 pukul 06.00 - 18.00";
         }
 
         $id_user = Auth::id();
