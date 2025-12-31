@@ -14,38 +14,27 @@ use Spatie\Permission\Models\Role;
 
 class MainController extends Controller
 {
-    /* public function role()
-    {
-        Role::create([
-            'name' => 'sekre',
-            'guard_name' => 'web'
-        ]);
-    } */
-
     public function index()
     {
         $id_user = Auth::id();
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
-        
-        // Perbaikan: Pakai first() langsung, jangan get()->first()
-        $mahasiswa = Mahasiswa::where('user_id', $id_user)->first(); 
 
-        // Perbaikan Utama: Cek jika user login DAN data mahasiswa ditemukan
+        $mahasiswa = Mahasiswa::where('user_id', $id_user)->first();
+
         if (Auth::check() && $mahasiswa) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
             return view('index', [
-                'smft' => $smft, 
-                'bpmft' => $bpmft, 
-                'suara' => $suara, 
+                'smft' => $smft,
+                'bpmft' => $bpmft,
+                'suara' => $suara,
                 'mahasiswa' => $mahasiswa
             ]);
         } else {
-            // Jika belum login atau bukan mahasiswa, tetap kirim variabel $mahasiswa (null) agar view tidak error
             return view('index', [
-                'smft' => $smft, 
+                'smft' => $smft,
                 'bpmft' => $bpmft,
-                'mahasiswa' => $mahasiswa 
+                'mahasiswa' => $mahasiswa
             ]);
         }
     }
@@ -55,22 +44,21 @@ class MainController extends Controller
         $id_user = Auth::id();
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
-        
+
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->first();
 
-        // Perbaikan Utama: Cek jika user login DAN data mahasiswa ditemukan
         if (Auth::check() && $mahasiswa) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
             return view('rekap', [
-                'smft' => $smft, 
-                'bpmft' => $bpmft, 
-                'suara' => $suara, 
+                'smft' => $smft,
+                'bpmft' => $bpmft,
+                'suara' => $suara,
                 'mahasiswa' => $mahasiswa
             ]);
         } else {
             return view('rekap', [
-                'smft' => $smft, 
-                'bpmft' => $bpmft, 
+                'smft' => $smft,
+                'bpmft' => $bpmft,
                 'mahasiswa' => $mahasiswa
             ]);
         }
@@ -108,7 +96,7 @@ class MainController extends Controller
         }
     }
 
-    public function vote(Request $request)
+public function vote(Request $request)
     {
         $currentDate = now()->format('Y-m-d H:i:s');
 
@@ -116,14 +104,12 @@ class MainController extends Controller
             return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
         }
 
-        // Pastikan tanggal ini sesuai jadwal pemilihan kamu
-        if ($currentDate < '2026-01-07 06:00:00' || $currentDate > '2026-01-07 18:00:00') {
+        if ($currentDate < '2025-12-07 06:00:00' || $currentDate > '2026-01-07 18:00:00') {
             return "Vote hanya dapat dilakukan pada tanggal 7 Januari 2026 pukul 06.00 - 18.00";
         }
 
         $id_user = Auth::id();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->first();
-        // $user = User::find($id_user); // Tidak dipakai, bisa dihapus jika mau
 
         if (!$mahasiswa) {
             return "Vote Gagal, Maaf Anda Belum Terverifikasi";
@@ -141,13 +127,20 @@ class MainController extends Controller
             return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT ";
         }
 
-        $mahasiswa->status = 'voted';
-        $mahasiswa->update();
+        try {
+            DB::transaction(function () use ($mahasiswa, $request) {
+                $mahasiswa->status = 'voted';
+                $mahasiswa->save();
 
-        $this->saveVote($mahasiswa->id, $request->smft);
-        $this->saveVote($mahasiswa->id, $request->bpmft);
+                $this->saveVote($mahasiswa->id, $request->smft);
+                $this->saveVote($mahasiswa->id, $request->bpmft);
+            });
 
-        return "Vote Disimpan, Terima kasih telah memilih";
+            return "Vote Disimpan, Terima kasih telah memilih";
+            
+        } catch (\Exception $e) {
+            return "Terjadi kesalahan saat menyimpan vote. Silahkan coba lagi.";
+        }
     }
 
     private function saveVote($mahasiswaId, $calonId)
@@ -160,7 +153,7 @@ class MainController extends Controller
 
     public function chart()
     {
-        $rekap = []; // Inisialisasi array rekap
+        $rekap = [];
 
         foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
             $prodis = [];
@@ -172,7 +165,7 @@ class MainController extends Controller
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('suaras.calon_id', '=', $calon_smft->id)
                     ->where('users.prodi_id', '=', $prodi->id)
-                    ->count(); // get()->count() diganti count() biar lebih cepat
+                    ->count();
 
                 array_push($prodis, $prodi->nama_prodi);
                 array_push($prodisValues, $jumlah);
@@ -204,7 +197,7 @@ class MainController extends Controller
 
     public function rekap()
     {
-        $rekap = []; // Inisialisasi array rekap
+        $rekap = [];
 
         foreach (Prodi::cursor() as $prodi) {
             $calonNames = [];

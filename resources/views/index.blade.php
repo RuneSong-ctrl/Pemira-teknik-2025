@@ -2,7 +2,7 @@
 @section('content')
     @php
         $currentDate = now()->format('Y-m-d H:i:s');
-        $startDate = '2026-01-07 06:00:00';
+        $startDate = '2025-12-07 06:00:00';
         $endDate = '2026-01-07 18:00:00';
     @endphp
 
@@ -28,7 +28,6 @@
         .text-musma-maroon { color: var(--musma-maroon) !important; }
         .bg-musma-maroon { background-color: var(--musma-maroon) !important; color: white; }
 
-        /* --- HERO SECTION CENTERED --- */
         .hero-fullscreen {
             position: relative;
             min-height: 100vh;
@@ -71,7 +70,6 @@
             padding-bottom: 10px;
         }
 
-        /* Teks Utama (Muswarah Mahsasiswa) */
         .hero-title-main {
             font-size: 4.5rem;
             font-weight: 800;
@@ -81,7 +79,6 @@
             text-transform: uppercase;
         }
 
-        /* Teks Sub (Fakultas Teknik 2025) - Outline style */
         .hero-title-sub {
             font-size: 3.5rem;
             font-weight: 800;
@@ -92,12 +89,11 @@
             text-transform: uppercase;
         }
 
-        /* Teks Ketiga (Universitas Udayana) - DIPERBAGUS */
         .hero-title-third {
             font-size: 1.8rem;
             font-weight: 600;
             color: #ffffff;
-            letter-spacing: 8px; /* Jarak huruf lebar biar elegan */
+            letter-spacing: 8px;
             text-transform: uppercase;
             margin-bottom: 50px;
             display: inline-block;
@@ -156,7 +152,6 @@
             transform: translateY(-5px);
         }
 
-        /* --- SECTION LAINNYA --- */
         .section-about { padding: 90px 0; background-color: var(--musma-white); }
         .about-heading { font-size: 2.2rem; font-weight: 800; color: var(--musma-black); margin-bottom: 20px; position: relative; display: inline-block; }
         .about-heading::after { content: ''; display: block; width: 60%; height: 4px; background: var(--musma-maroon); margin: 15px auto 0; border-radius: 2px; }
@@ -317,7 +312,6 @@
 
         @media (max-width: 991px) {
             .hero-fullscreen { padding-top: 120px; padding-bottom: 80px; text-align: center; }
-            /* Penyesuaian ukuran font untuk tablet/mobile */
             .hero-title-main { font-size: 3.2rem; }
             .hero-title-sub { font-size: 2.5rem; }
             .hero-title-third { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 40px; }
@@ -327,7 +321,6 @@
         }
 
         @media (max-width: 576px) {
-            /* Penyesuaian ukuran font untuk layar kecil */
             .hero-title-main { font-size: 2.4rem; }
             .hero-title-sub { font-size: 1.8rem; }
             .hero-title-third { font-size: 1.1rem; letter-spacing: 2px; }
@@ -377,16 +370,16 @@
                         <div class="about-card text-center">
                             <div class="icon-box">
                              <div style="
-         width: 60px;                 
-        height: 60px;                
-        background-color: #FFC107;   
-        -webkit-mask: url('/img/ftunud.png') no-repeat center;
-        mask: url('/img/ftunud.png') no-repeat center;
+        width: 60px;                 
+       height: 60px;                
+       background-color: #FFC107;   
+       -webkit-mask: url('/img/ftunud.png') no-repeat center;
+       mask: url('/img/ftunud.png') no-repeat center;
 
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        
-        display: inline-block;
+       -webkit-mask-size: contain;
+       mask-size: contain;
+       
+       display: inline-block;
     "></div>
 </div>
                             <h4 class="font-weight-bold text-musma-maroon mb-3">Ketua SMFT</h4>
@@ -436,7 +429,7 @@
                         <p class="text-muted lead mb-4">Gunakan hak pilih Anda dengan bijak. Satu suara menentukan arah masa depan Teknik.</p>
                     </div>
                     <div class="col-lg-10 appear-animation" data-aos="fade-up" data-aos-delay="200">
-                         <div class="poll-status-alert">
+                          <div class="poll-status-alert">
                              <div class="warning-start font-weight-bold text-dark">
                                 @guest 
                                     <i class="fas fa-lock mr-2 text-musma-red"></i> Silahkan login terlebih dahulu untuk melakukan pemilihan.
@@ -466,7 +459,7 @@
                     </div>
                 </div>
 
-                <form action="/vote" id="#create-form" method="POST">
+                <form action="/vote" id="create-form" method="POST">
                     @csrf
                     
                     <div class="smft-section mb-5 appear-animation" data-aos="fade-up" data-aos-delay="300">
@@ -490,7 +483,7 @@
                                                     @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
                                                 @endif 
                                             @endauth required name="smft" value="{{ $item->id }}" />
-                                       
+                                    
                                         <div class="candidate-card-inner">
                                             <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -529,7 +522,7 @@
                                                     @foreach ($suara as $item2){{ $item->id == $item2->calon_id ? 'checked' : '' }}@endforeach
                                                 @endif
                                             @endauth required name="bpmft" value="{{ $item->id }}" />
-                                       
+                                    
                                         <div class="candidate-card-inner">
                                              <div class="selected-indicator"><i class="fas fa-check"></i></div>
                                             <div class="candidate-img-wrapper">
@@ -633,7 +626,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-musma-maroon text-white">
-                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Konfirmasi Pilihan</h5>
+                    <h5 class="modal-title font-weight-bold text-white" id="exampleModalLabel">Konfirmasi Pilihan</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -723,7 +716,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-success text-white justify-content-center">
-                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel"><i class="fas fa-check-circle mr-2"></i> Vote Berhasil!</h5>
+                    <h5 class="modal-title font-weight-bold text-white" id="exampleModalLabel"><i class="fas fa-check-circle mr-2"></i> Vote Berhasil!</h5>
                 </div>
                 <div class="modal-body text-center p-5">
                     <div class="mb-4">
@@ -747,7 +740,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-musma-maroon text-white">
-                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Visi & Misi Kandidat</h5>
+                    <h5 class="modal-title font-weight-bold text-white" id="exampleModalLabel">Visi & Misi Kandidat</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -802,7 +795,7 @@
         }
         $('#btn-submit-modal').on("click", function(event) {
             event.preventDefault()
-            var data = $('form').serialize();
+            var data = $('#create-form').serialize();
             $.ajax({
                 url: "{{ route('vote') }}",
                 method: "POST",
