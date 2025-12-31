@@ -2,7 +2,7 @@
 @section('content')
     @php
         $currentDate = now()->format('Y-m-d H:i:s');
-        $startDate = '2025-12-07 06:00:00';
+        $startDate = '2026-01-07 06:00:00';
         $endDate = '2026-01-07 18:00:00';
     @endphp
 

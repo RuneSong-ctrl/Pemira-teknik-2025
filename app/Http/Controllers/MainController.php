@@ -104,7 +104,7 @@ public function vote(Request $request)
             return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
         }
 
-        if ($currentDate < '2025-12-07 06:00:00' || $currentDate > '2026-01-07 18:00:00') {
+        if ($currentDate < '2026-01-07 06:00:00' || $currentDate > '2026-01-07 18:00:00') {
             return "Vote hanya dapat dilakukan pada tanggal 7 Januari 2026 pukul 06.00 - 18.00";
         }
 
