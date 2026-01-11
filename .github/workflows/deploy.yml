@@ -23,10 +23,11 @@ jobs:
             
             git pull origin main
 
-            export COMPOSER_ALLOW_SUPERUSER=1
+           
 
             composer update --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
             php artisan optimize
 
+            chmod -R 777 storage bootstrap/cache
             
