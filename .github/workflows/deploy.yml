@@ -1,4 +1,4 @@
-name  : Deploy web ke server mjs debian
+name  : Deploy web ke server  debian
 
 on:
   push:
