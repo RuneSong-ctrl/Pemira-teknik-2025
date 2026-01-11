@@ -20,14 +20,13 @@ jobs:
             git config --global --add safe.directory /var/www/teknik.livens.web.id
             cd /var/www/teknik.livens.web.id
 
-            
+          
             git pull origin main
 
-           
-
+          
             composer update --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
             php artisan optimize
 
-            chmod -R 777 storage bootstrap/cache
+           
             
