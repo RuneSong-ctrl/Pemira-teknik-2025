@@ -19,8 +19,8 @@ jobs:
           script: |
             git config --global --add safe.directory /var/www/teknik.livens.web.id
             cd /var/www/teknik.livens.web.id
+
             
-            sudo chown -R $USER:www-data
             git pull origin main
 
             export COMPOSER_ALLOW_SUPERUSER=1
