@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 1945
           script: |
-            cd /var/www/teknik.lives.web.id
+            cd /var/www/teknik.livens.web.id
             git pull origin main
 
             export COMPOSER_ALLOW_SUPERUSER=1
