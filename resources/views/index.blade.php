@@ -338,8 +338,8 @@
                     </div>
                     
                     <div class="appear-animation" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="hero-title-main">Musyawarah Mahasiswa</div>
-                        <div class="hero-title-sub">Fakultas Teknik 2026</div>
+                        <div class="hero-title-main">CI CD GITHUB ACTION</div>
+                        <div class="hero-title-sub">DEMO TUGAS MANAJEMEN JARINGAN SERVER</div>
                         <div class="hero-title-third">Universitas Udayana</div>
                     </div>
 
