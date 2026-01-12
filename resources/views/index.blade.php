@@ -1,4 +1,4 @@
-@extends('layouts/master', ['title' => 'Musma Teknik 2025 '])
+@extends('layouts/master', ['title' => 'CI CD WEB MJS '])
 @section('content')
     @php
         $currentDate = now()->format('Y-m-d H:i:s');
